@@ -8,5 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Notion Script
-        run: ./.github/scripts/notion.sh
+        run: chmod +x ./.github/scripts/notion.sh
+          ./.github/scripts/notion.sh
         shell: bash
