@@ -7,5 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Notion Script
-        run: ./.github/scripts/notion.sh
+      - uses: actions/checkout@v2
+      - run: ./.github/scripts/notion.sh
         shell: bash
