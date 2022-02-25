@@ -1,0 +1,10 @@
+name: Github issue -> Notion card
+on:
+  issues:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Notion Script
+        run: ./.github/scripts/notion.sh
+        shell: bash
