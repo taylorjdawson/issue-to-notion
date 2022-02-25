@@ -1,5 +1,6 @@
 name: Github issue -> Notion card
 on:
+  workflow_dispatch:
   issues:
 jobs:
   build:
