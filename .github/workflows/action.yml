@@ -16,6 +16,4 @@ jobs:
           ACTION: ${{ github.event.issue.action }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
           TITLE: ${{ github.event.issue.title }}
-        run: |
-          echo Action $ACTION url $ISSUE_URL title $TITLE
         shell: bash
