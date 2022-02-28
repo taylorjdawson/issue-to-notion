@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        run: chmod +x ./.github/scripts/notion.sh
+      - run: chmod +x ./.github/scripts/notion.sh
           ./.github/scripts/notion.sh
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
