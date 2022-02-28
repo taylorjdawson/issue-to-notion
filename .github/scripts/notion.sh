@@ -39,9 +39,14 @@ generate_post_data() {
 EOF
 }
 
-curl 'https://api.notion.com/v1/pages' \
-  -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
-  -H "Content-Type: application/json" \
-  -H "Notion-Version: 2021-08-16" \
-  --data "$(generate_post_data)"
+main() {
+  curl 'https://api.notion.com/v1/pages' \
+    -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
+    -H "Content-Type: application/json" \
+    -H "Notion-Version: 2021-08-16" \
+    --data "$(generate_post_data)" 2>&1
+}
 
+OUT=$(main)
+
+echo $OUT
