@@ -14,13 +14,13 @@ jobs:
           -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
           -H "Content-Type: application/json" \
           -H "Notion-Version: 2021-08-16" \
-          --data '{"parent":{"type":"database_id","database_id":"'"$DATABASE_ID"'"},"icon":{"type":"emoji","emoji":"🐛"},"properties":{"Name":{"type":"title","title":[{"type":"text","text":{"content":"'"$TITLE"'"}}]},"Assigned":{"people":[{"object":"user","id":"f6cbb362-4908-4138-9ef0-434003d9a9f8"}]},"Status":{"select":{"name":"'"$STATUS"'"}},"Type":{"multi_select":[{"name":"bug"}]}}}'
+          --data '{"parent":{"type":"database_id","database_id":"'"$DATABASE_ID"'"},"icon":{"type":"emoji","emoji":"🐛"},"properties":{"Name":{"type":"title","title":[{"type":"text","text":{"content":"'"$TITLE"'"}}]},"Assigned":{"people":[{"object":"user","id":"f6cbb362-4908-4138-9ef0-434003d9a9f8"}]},"Status":{"select":{"name":"'"$STATUS"'"}},"Type":{"multi_select":[{"name":"bug"}]}},"children":[{"object":"block","type":"embed","embed":{"url":"'"$ISSUE_URL"'"}}]}'
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           STATE: ${{ github.event.issue.state }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
           TITLE: ${{ github.event.issue.title }}
-          STATUS: ${{ contains(github.event.issue.state, 'open') && echo "Current Sprint" || echo "Production" }}
+          STATUS: Current Sprint
           # Product Work Board
           DATABASE_ID: 29876f9a9b864ca39a984f42e17fd345
         shell: bash
