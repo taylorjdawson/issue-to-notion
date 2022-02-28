@@ -1,13 +1,21 @@
 name: Github issue -> Notion card
 on:
   workflow_dispatch:
-  issues:
+  issues: 
+    types: [opened, deleted, closed]
 jobs:
-  build:
+  issue:
+    name: "Issue to Notion"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run Notion Script
         run: chmod +x ./.github/scripts/notion.sh
           ./.github/scripts/notion.sh
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          ACTION: ${{ github.event.issue.action }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          TITLE: ${{ github.event.issue.title }}
+        run: |
+          echo Action $ACTION url $ISSUE_URL title $TITLE
         shell: bash
