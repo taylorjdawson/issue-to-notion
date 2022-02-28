@@ -12,7 +12,7 @@ generate_post_data() {
   "properties":{
     "Name": {
       "type": "title",
-      "title": [{ "type": "text", "text": { "content":  "$TITLE" } }]
+      "title": [{ "type": "text", "text": { "content":  "TEST TITLE" } }]
     },
     "Assigned": {
       "people": [
@@ -39,14 +39,9 @@ generate_post_data() {
 EOF
 }
 
-main() {
-  curl 'https://api.notion.com/v1/pages' \
-    -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
-    -H "Content-Type: application/json" \
-    -H "Notion-Version: 2021-08-16" \
-    --data "$(generate_post_data)" 2>&1
-}
+curl 'https://api.notion.com/v1/pages' \
+  -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
+  -H "Content-Type: application/json" \
+  -H "Notion-Version: 2021-08-16" \
+  --data "$(generate_post_data)"
 
-OUT=$(main)
-
-echo $OUT
