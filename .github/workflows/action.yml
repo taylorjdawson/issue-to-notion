@@ -20,7 +20,7 @@ jobs:
           STATE: ${{ github.event.issue.state }}
           ISSUE_URL: ${{ github.event.issue.html_url }}
           TITLE: ${{ github.event.issue.title }}
-          STATUS: ${{ [ github.event.issue.state === 'open' ] && "Current Sprint" || "Production" }}
+          STATUS: ${{ [ contains(github.event.issue.state, 'open') ] && echo "Current Sprint" || echo "Production" }}
           # Product Work Board
           DATABASE_ID: 29876f9a9b864ca39a984f42e17fd345
         shell: bash
