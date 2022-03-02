@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          people=$(for i in $(echo $USERS | tr ":" " "); do echo -n '{"object":"user","id":"'$i'"},'; done)
+          people=$(for i in $(echo $NOTION_USER_IDS | tr "," " "); do echo -n '{"object":"user","id":"'$i'"},'; done)
           curl 'https://api.notion.com/v1/pages' \
           -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
           -H "Content-Type: application/json" \
@@ -25,5 +25,6 @@ jobs:
           # Product Work Board
           DATABASE_ID: 29876f9a9b864ca39a984f42e17fd345
           PROJECT_NAME: Python-SDK
-          USERS: f6cbb362-4908-4138-9ef0-434003d9a9f8:8a3a2287-5d2c-4665-906d-02ae9a113340:3b407adf-6552-40de-b22f-5efa852c34a2
+          # User ids of who to assign the card to in notion: Taylor, Adam, Aaron
+          NOTION_USER_IDS: f6cbb362-4908-4138-9ef0-434003d9a9f8,8a3a2287-5d2c-4665-906d-02ae9a113340,3b407adf-6552-40de-b22f-5efa852c34a2
         shell: bash
