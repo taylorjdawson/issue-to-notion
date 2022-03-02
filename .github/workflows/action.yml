@@ -10,11 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          
           curl 'https://api.notion.com/v1/pages' \
           -H 'Authorization: Bearer '"$NOTION_TOKEN"'' \
           -H "Content-Type: application/json" \
           -H "Notion-Version: 2022-02-22" \
-          --data '{"parent":{"type":"database_id","database_id":"'"$DATABASE_ID"'"},"icon":{"type":"emoji","emoji":"🐛"},"properties":{"Name":{"type":"title","title":[{"type":"text","text":{"content":"'"$TITLE"'"}}]},"Assigned":{"people":[$(for i in $(echo $USERS | tr ":" " "); do echo -n '{"object":"user","id":"'$i'"},'; done)]},"Status":{"select":{"name":"'"$STATUS"'"}},"Type":{"multi_select":[{"name":"bug"}]},"Project":{"multi_select":[{"name":"'"$PROJECT_NAME"'"}]}},"children":[{"object":"block","type":"bookmark","bookmark":{"url":"'"$ISSUE_URL"'"}}]}'
+          --data '{"parent":{"type":"database_id","database_id":"'"$DATABASE_ID"'"},"icon":{"type":"emoji","emoji":"🐛"},"properties":{"Name":{"type":"title","title":[{"type":"text","text":{"content":"'"$TITLE"'"}}]},"Assigned":{"people":['"$(for i in $(echo $USERS | tr ":" " "); do echo -n '{"object":"user","id":"'$i'"},'; done)'"]},"Status":{"select":{"name":"'"$STATUS"'"}},"Type":{"multi_select":[{"name":"bug"}]},"Project":{"multi_select":[{"name":"'"$PROJECT_NAME"'"}]}},"children":[{"object":"block","type":"bookmark","bookmark":{"url":"'"$ISSUE_URL"'"}}]}'
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           STATE: ${{ github.event.issue.state }}
